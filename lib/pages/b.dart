@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'contacts/details.dart';
 
 class BHomeScreen extends StatefulWidget {
   _BHomeScreenState createState() => _BHomeScreenState();
@@ -68,7 +69,9 @@ class _BHomeScreenState extends State<BHomeScreen> {
               )
             : GestureDetector(
                 onTap: () {
-                  print('目前:');
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => ContactsDetails(id: item["data"][i]["label"])
+                  ));
                 },
                 child: Container(
                   child: Row(
@@ -255,7 +258,6 @@ class _BHomeScreenState extends State<BHomeScreen> {
                     ? GestureDetector(
                         onTap: () {
                           // print('回到顶部');
-                          print(heightArr);
                           _controller.animateTo(0.0,
                             duration: Duration(milliseconds: 200),
                             curve: Curves.ease
@@ -269,8 +271,6 @@ class _BHomeScreenState extends State<BHomeScreen> {
                           // print(tabData[index]["data"].length);
 
                           // 这里要计算每个label的高度 比如A是350 B是360那么B也要加上A的高度就是710
-
-                          print(tabData[index]["data"].length * 90);
                           _controller.animateTo(heightArr[index].toDouble(),
                           // _controller.animateTo(1128.75,
                             duration: Duration(milliseconds: 200),
