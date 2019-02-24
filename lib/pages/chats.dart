@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'chats/ChatInterface.dart';
 
 class Chats extends StatelessWidget {
 
@@ -13,7 +14,9 @@ class Chats extends StatelessWidget {
         itemBuilder: (context, int index) {
           return GestureDetector(
             onTap: () {
-              print('这是第$index个');
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => ChatInterface(id: 'test1')
+              ));
             },
             child: Container(
               child: Row(
