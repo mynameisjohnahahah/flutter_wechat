@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_socket_io/flutter_socket_io.dart';
+import 'package:flutter_socket_io/socket_io_manager.dart';
 
 class ChatInterface extends StatefulWidget {
   ChatInterface({Key key, @required this.id}):super(key: key);
@@ -19,15 +21,60 @@ class _ChatInterfaceState extends State<ChatInterface> {
     super.dispose();
   }
 
+  SocketIO socketIO;
+  void _connectSocket01() { 
+    //update your domain before using  
+    socketIO = SocketIOManager().createSocketIO("https://119.29.119.87:8765", "", query: "userId=21031", socketStatusCallback: _socketStatus); 
+
+    //call init socket before doing anything 
+    socketIO.init(); 
+
+    //subscribe event
+    // socketIO.subscribe("socket_info", _onSocketInfo); 
+
+    //connect socket 
+    socketIO.connect(); 
+  }
+
+  _socketStatus(dynamic data) { 
+	print("测试测试测试测试: " + data); 
+}
+
+  // _subscribes() { 
+  //   if (socketIO != null) { 
+  //     socketIO.subscribe("chat_direct", _onReceiveChatMessage); 
+  //   } 
+  // }
+
+  // void _onReceiveChatMessage(dynamic message) { 
+  //   print("Message from UFO: " + message); 
+  // }
+
+  // void _sendChatMessage(String msg) async { 
+  //   if (socketIO != null) { 
+  //     String jsonData = '{"message":{"type":"Text","content": ${(msg != null && msg.isNotEmpty) ? '"${msg}"' : '"Hello SOCKET IO PLUGIN :))"'},"owner":"589f10b9bbcd694aa570988d","avatar":"img/avatar-default.png"},"sender":{"userId":"589f10b9bbcd694aa570988d","first":"Ha","last":"Test 2","location":{"lat":10.792273999999999,"long":106.6430356,"accuracy":38,"regionId":null,"vendor":"gps","verticalAccuracy":null},"name":"Ha Test 2"},"receivers":["587e1147744c6260e2d3a4af"],"conversationId":"589f116612aa254aa4fef79f","name":null,"isAnonymous":null}'; 
+  //     socketIO.sendMessage("chat_direct", jsonData, _onReceiveChatMessage); 
+  //   }
+  // }
+
+  // _destroySocket() { 
+  //   if (socketIO != null) { 
+  //     SocketIOManager().destroySocket(socketIO); 
+  //   } 
+  // }
+
+  void initState() {
+    super.initState();
+
+    _connectSocket01();
+  }
+
   Widget buildTextField(TextEditingController controller) {
     return TextField(
       controller: controller,
       // autofocus: true, // 对焦
     );
   }
-
-  // 聊天界面 根据id自己的在右边，别人消息在左边
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,38 +113,43 @@ class _ChatInterfaceState extends State<ChatInterface> {
                 child: PageView(
                   children: <Widget>[
                     ListView.builder(
-                      itemCount: 100,
-                      itemExtent: 50.0,
+                      itemCount: 20,
+                      // itemExtent: 50.0,
                       controller: _controller,
                       itemBuilder: (context, index) {
                         // return ListTile(title: Text("$index"));
                         return Container(
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                child: Image.network(
-                                  'https://b-ssl.duitang.com/uploads/item/201509/24/20150924190747_8dVyu.jpeg',
-                                  scale: 1.0,
-                                  fit: BoxFit.cover,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: new Wrap(
+                              alignment: WrapAlignment.start,
+                              children: <Widget>[
+                                new Container(
+                                  margin: const EdgeInsets.only(right: 16.0),
+                                  child: new CircleAvatar(child: new Text('rrr')),
                                 ),
-                                // margin: EdgeInsets.only(right: 10.0),
-                                width: 50.0,
-                                height: 50.0,
-                              ),
-                              Container(
-                                child: Text(
-                                  '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
-                                ),
-                                width: 120.0,
-                              )
-                            ],
+                                Container(
+                                  child: Text(
+                                    'qqqqwrrrrrrrrrrrrrrrrrwwwq465r4qw65r4qw654rqw64r4',
+                                    softWrap: true,
+                                  ),
+                                  width: 250
+                                )
+                                // RaisedButton(
+                                //   onPressed: () {
+                                //     FocusScope.of(context).requestFocus(FocusNode());
+                                //   },
+                                //   child: Text('qwer'),
+                                // )
+                              ]
+                            ),
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.red
+                            color: Colors.white
                           ),
                           padding: EdgeInsets.only(top: 0.0, left: 10.0),
                         );
-                      }
+                      },
                     ),
                   ],
                 )
