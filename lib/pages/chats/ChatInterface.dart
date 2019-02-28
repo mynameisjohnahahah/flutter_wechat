@@ -24,7 +24,7 @@ class _ChatInterfaceState extends State<ChatInterface> {
 
   void initState() {
     super.initState();
-    initPlatformState();
+    // initPlatformState();
   }
   
    Future<void> initPlatformState() async {
@@ -34,8 +34,8 @@ class _ChatInterfaceState extends State<ChatInterface> {
       myIO.connect();
       String jsonData =
               '{"content":"test"}';
-      myIO.emit("send",jsonData);
-      myIO.on("getMsg",(data){
+      myIO.emit("send", jsonData);
+      myIO.on("getMsg", (data) {
         debugPrint(data.toString());
       });
     } catch(error) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/log_in_register/login.dart';
 import 'index.dart';
 import 'dart:async';
 
@@ -40,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   //销毁函数
   void _goMain() {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => MyApp()), 
+      MaterialPageRoute(builder: (context) => MyHomePage()), 
       (route)=> route==null);
   }
 

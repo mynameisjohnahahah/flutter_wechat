@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:dio/dio.dart';
-import 'utils/http.dart';
+import 'utils/api.dart';
 
 // 引用页面
-import 'pages/Chats.dart';
+import 'pages/chats.dart';
 import 'pages/b.dart';
-import 'pages/Discover.dart';
-import 'pages/Me.dart';
+import 'pages/discover.dart';
+import 'pages/me.dart';
 import 'pages/SearchBar.dart';
-
-// Dio dio = new Dio();
 
 // 主函数/入口函数
 void main() => runApp(MyApp());
@@ -53,10 +50,11 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
     super.initState();
   }
 
-  // void test() async {
-  //   var response = await Http().get('/posts', data: {});
-  //   print(response);
-  // }
+  Future<void> test() async {
+    // var res = await Http().get('/A/all', data: {});
+    var res = await Api().login({});
+    print(res);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +91,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         ],
         currentIndex: currentIndex,
         onTap: (int index) {
-          // test();
+          test();
           setState(() {
             this.currentIndex = index;
             this.index = index;
