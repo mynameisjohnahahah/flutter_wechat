@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'utils/api.dart';
+// import 'utils/api.dart';
 
 // 引用页面
 import 'pages/chats.dart';
@@ -50,11 +50,11 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
     super.initState();
   }
 
-  Future<void> test() async {
-    // var res = await Http().get('/A/all', data: {});
-    var res = await Api().login({});
-    print(res);
-  }
+  // Future<void> test() async {
+  //   // var res = await Http().get('/A/all', data: {});
+  //   var res = await Api().login({});
+  //   print(res);
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +91,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         ],
         currentIndex: currentIndex,
         onTap: (int index) {
-          test();
+          // test();
           setState(() {
             this.currentIndex = index;
             this.index = index;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_one/index.dart';
+import './register.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -174,7 +175,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   child: Padding(
                     padding: EdgeInsets.only(top: 10.0),
-                    child: Text('立即注册'),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => Register()), 
+                            (route) => route == null);
+                      },
+                      child: Text('立即注册'),
+                    ),
                   ),
                 )
               ],
